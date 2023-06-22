@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('role');
+            /// https://stackoverflow.com/a/37663054/18038473
+            $table->string('role')->default('user');
             $table->rememberToken();
             $table->timestamps();
         });

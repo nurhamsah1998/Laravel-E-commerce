@@ -31,7 +31,7 @@
           <img src={{asset("AdminLTE/dist/img/user2-160x160.jpg")}} class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{auth()->user()->name ? auth()->user()->name : "Guest" }}</a>
         </div>
       </div>
 
@@ -64,14 +64,52 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <button style="margin-left: 20px" class="btn btn-danger" data-toggle="modal" data-target="#modal-default">
+              Keluar
+              </button>
+          </li>
        
         </ul>
       </nav>
+      
       <!-- /.sidebar-menu -->
     </div>
+    
     <!-- /.sidebar -->
   </aside>
-
+  <section class="content">
+    <div class="modal fade" id="modal-default">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Konfirmasi</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Apakah Anda Yakin Ingin Keluar ?</p>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+            <button  type="button" class="btn btn-primary">
+                          <a class=" text-light" href="{{ route('logout') }}"
+                          onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                          Yup Saya Yakin
+                       </a>  
+                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+          </button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+  </section>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
         @yield('content')
